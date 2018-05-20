@@ -1,0 +1,41 @@
+<!--
+A very good link
+https://becominghuman.ai/designing-ai-solving-snake-with-evolution-f3dd6a9da867
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- JAVASCRIPT -->
+  <script src='js/lib/nn.js'></script>
+  <script src='js/lib/matrix.js'></script>
+  <script src='js/ga.js'></script>
+
+  <script src='js/main.js'></script>
+
+  <script src='js/tile.js'></script>
+  <script src='js/snake.js'></script>
+  <script src='js/food.js'></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.fw.png">
+
+  <title>Snake A.I.</title>
+</head>
+<body onload='init()'>
+  <canvas id="c" width=600 height=600></canvas>
+  <p id="snakeNumber"></p>
+  <p id="populNumber"></p>
+  <p id="fitness"></p>
+
+  <!-- DEBUG ONLY -->
+  <div class="slidecontainer">
+    <input type="range" min="1" max="300" value="50" class="slider" id="myRange">
+  </div>
+</body>
+</html>
