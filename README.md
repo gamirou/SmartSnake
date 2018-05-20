@@ -7,7 +7,15 @@ Every snake has a "brain" which is a neural network and next generation is based
 
 To get the project on your computer, press the ___Clone or Download___ button.
 
-## Issue solved []
+## Issues and features
+- [x] Finishing Snake Game
+- [x] Adding neural networks
+- [x] Adding HTML elements for debugging
+- [x] Snake generations added
+- [x] Mutation and crossover
+- [ ] More explicit comments
+- [ ] Fixing sudden death issue
+- [ ] Stop every snake going forward
 
 
 ## Built With
