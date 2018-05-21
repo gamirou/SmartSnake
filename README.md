@@ -1,7 +1,15 @@
 # Smart Snake
-==============
+
 It is a simulation in which 50 snakes in each generation try their luck to win the game.
 Every snake has a "brain" which is a neural network and next generation is based on a genetic algorithm.
+
+## What do I need help
+
+So, this is my first ever ___Neural Network___ program, I would not say the most creative but it is a good exercise because I have always been interested in AIs.
+The problem is based on the design of the neural network, I think. I've tested the program several times until the 100th generation and the snakes eat food by accident and always move forwards towards the wall. I don't really understand why it does that. Only 56 food pieces were eaten in 100 generations, which is a total of __5000__ snakes!
+I posted an issue referring to this more, and I would appreciate if you could give me any ideas!
+
+Thank you - Gami
 
 ## Getting Started
 
