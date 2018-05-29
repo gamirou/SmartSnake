@@ -49,7 +49,9 @@ function getBestSnakes() {
     }
 
     for (let i = 0; i < BEST_SNAKES; i++) {
-        bestSnakes.push(snakes[fitnesses[i][1]].brain)
+        bestSnakes.push(snakes[fitnesses[i][1]].brain);
+        // They are mutated
+        bestSnakes[i].mutate(0.1);
     }
     return bestSnakes;
 
@@ -59,7 +61,7 @@ function getBestSnakes() {
 function calculateFitness() {
     total = 0;
     for (f of snakes) {
-        total += f.score;
+        total += Math.abs(f.score);
     }
     for (let i = 0; i < snakes.length; i++) {
         snakes[i].fitness = snakes[i].score / total;
