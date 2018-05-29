@@ -1,11 +1,15 @@
 class Snake {
     constructor() {
+        // Tail is an array of tiles
         this.tail = new Array(3);
-        this.score = 0;
 
+        // 2D Vector
         this.dir = {};
 
+        // The displayed score
         this.score = 0;
+
+        // The normalized score
         this.fitness = 0;
         this.dead = false;
         this.brain = new NeuralNetwork(5, 6, 3);
@@ -13,6 +17,9 @@ class Snake {
         this.reset();
     }
 
+    /**
+     * It initializes the head and tail
+     */
     reset(new_game="none") {
         if (new_game == "new_game") {
             this.tail = new Array(3);
@@ -30,6 +37,7 @@ class Snake {
 
             let choices = [-2, -1, 0, 1]
             if (tile != 1) {
+                // Checking if the the next tile is in bounds
                 let tile_not_chosen = this.tail[tile-2];
                 if (tile_not_chosen.row > i) {
                     choices.splice(0, 1);
@@ -72,6 +80,10 @@ class Snake {
         this.dir = {x: this.head.row - this.tail[1].row, y: this.head.col - this.tail[1].col};
     }
 
+    /**
+     * The way it works it makes a new brain, not a new snake.
+     * The snakes object are part of an object pool to increase performance
+     */
     setBrain(brain) {
         this.reset("new_game");
         this.brain = brain.copy();
@@ -92,6 +104,9 @@ class Snake {
         return (this.head == food.spot);
     }
 
+    /**
+     * Checks if the head goes in the tail
+     */
     inTail() {
         for (let i = this.tail.length - 1; i>=0; i--) {
             for (let j = this.tail.length - 1; j>=0; j--) {
@@ -104,6 +119,10 @@ class Snake {
         return false;
     }
 
+    /**
+     * Changes direction for the snake
+     * @param  {[type]} movement Changes direction
+     */
     move(movement) {
         // 0 - straight, 1-left 2-right
         let temp =this.dir.x;
@@ -125,6 +144,7 @@ class Snake {
     }
 
     think() {
+        // Centre of the head
         let centre = {x: this.head.x + TILE_WIDTH/2, y: this.head.y + TILE_WIDTH/2};
         let inputs = [];
         // Distance to walls, food
@@ -145,6 +165,9 @@ class Snake {
         inputs[4] = inputs[4] / dist(food.centre.x, food.centre.y, max_x, max_y);
 
         // console.log(this.dir)
+
+        // The outputs is an array of 3 values, and it moves the snake based on the
+        // maximum number's index
         let outputs = this.brain.predict(inputs);
         this.move(outputs.indexOf(outputs.max()));
         // console.log("OUTPUTS ARE")
@@ -152,12 +175,13 @@ class Snake {
     }
 
     update() {
-        // DIRECTIA
-        // Stanga sau dreapta
+        // DIRECTION
+        // Left or right
 
 
         // console.log(this.dir);
 
+        // Checks if the new spot is in bounds or in tail
         let new_row = this.head.row+this.dir.x;
         let new_col = this.head.col+this.dir.y;
 
@@ -165,6 +189,8 @@ class Snake {
             || this.tail.indexOf(tiles[new_row][new_col]) != -1
             || this.score <= -15
             ) {
+
+            // Again, no objects are destroyed, just new brains initialized
             this.dead = true;
             food.newSpot();
 
@@ -185,6 +211,7 @@ class Snake {
 
         let newDist = dist(this.head.x, this.head.y, food.centre.x, food.centre.y);
 
+        // If it goes further away, it decreases the score, otherwise it increases the score
         this.score = oldDist > newDist ? this.score + 1 : this.score - 10;
     }
 }
